@@ -1,23 +1,26 @@
+"use client";
+
 import Card from "@/components/Card";
-import { unstable_noStore } from "next/cache";
-
-const getBreeds = async () => {
-  try {
-    const response = await fetch(`${process.env.URL}/api`, {
-      cache: "no-store", // Disable caching to ensure fresh data on each request
-    });
-    const data: Array<TCard> = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching breeds:", error);
-    return null;
-  }
-};
+import { useEffect, useState } from "react";
 
 export default async function Home() {
-  unstable_noStore();
-  const breeds = await getBreeds();
+  const [breeds, setBreeds] = useState<Array<TCard> | null>([]);
+
+  useEffect(() => {
+    const fetchRandomBreeds = async () => {
+      try {
+        const res = await fetch(`/api`);
+
+        const data = await res.json();
+
+        setBreeds(data);
+      } catch (error) {
+        setBreeds(null);
+      }
+    };
+
+    fetchRandomBreeds();
+  }, []);
 
   if (breeds === null) {
     return (
