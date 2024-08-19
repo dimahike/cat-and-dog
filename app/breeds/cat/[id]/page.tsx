@@ -2,9 +2,7 @@ import React from "react";
 
 const getCatBreeds = async (id: string) => {
   try {
-    const response = await fetch(`${process.env.URL}/api/cats/${id}`, {
-      cache: "no-store", // Disable caching to ensure fresh data on each request
-    });
+    const response = await fetch(`${process.env.URL}/api/cats/${id}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch breed data");

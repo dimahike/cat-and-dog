@@ -9,7 +9,7 @@ export default async function Home() {
   useEffect(() => {
     const fetchRandomBreeds = async () => {
       try {
-        const res = await fetch(`/api`);
+        const res = await fetch(`/api?refresh=${Math.random()},`);
 
         const data = await res.json();
 
