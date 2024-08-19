@@ -1,4 +1,5 @@
 import React from "react";
+import { unstable_noStore } from "next/cache";
 
 const getCatBreeds = async (id: string) => {
   try {
@@ -20,6 +21,7 @@ const getCatBreeds = async (id: string) => {
 };
 
 async function CatDetails({ params }: { params: { id: string } }) {
+  unstable_noStore();
   const breed = await getCatBreeds(params.id);
 
   if (!breed) {
