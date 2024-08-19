@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import { unstable_noStore } from "next/cache";
 
 const getBreeds = async () => {
   try {
@@ -15,6 +16,7 @@ const getBreeds = async () => {
 };
 
 export default async function Home() {
+  unstable_noStore();
   const breeds = await getBreeds();
 
   if (breeds === null) {
